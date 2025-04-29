@@ -52,8 +52,8 @@ fast.tunes<-function(years,step.size=0.05,tuner="m",  direction = 'backwards',ag
   n.years<-length(years)
   # Not using this, but I might someday, this is the minimum age in the VPA, we've filled in the rest of the 0s...
   min.age <- min(ages)
-  # Now these all run from age 0 not
-  ages <- 0:max(ages)
+  #  Run from min age to max age!
+  ages <- min.age:max(ages)
   # Making a dataframe for later.
   res <- data.frame(year = years,vpa.abund = N.init, est.abund = NA, diff= NA,per.diff = NA,lambda=NA,lambda.vpa.init = NA,
                     removals = NA,removals.init = NA,mean.fec=NA,mean.vpa.fec = NA,mean.nm = NA,mean.vpa.nm = NA)
