@@ -624,7 +624,6 @@ if(load.results==F)
 
     for(y in 2:n.sim.years)
     {
-      
       # Get our sample for this run
       f.pick <- sample(nrow(try$fecund.opt),size=1)
       nm.pick <- sample(nrow(try$nm.opt),size=1)
@@ -1492,6 +1491,8 @@ save_plot(paste0(loc,"/Figures/tuned/No_age_correction/Lambda_sd_",what.2.tune,"
 
 # Overall density dependence
 # MAIN PAPER FIGURE#
+u.colors <- c("#FFD500","#005BBB")
+
 dd.nf.overall.plt <-ggplot(no.stock.gam.nf.dat , aes(x=prop.abund,y=exp(fit))) + 
                                 geom_point(data = dd.dat,aes(x=prop.abund,y=lam.no.fish),size=2,alpha=0.1) +  
                                 geom_ribbon(aes(ymin=exp(LCI),ymax=exp(UCI)),alpha=0.5,linewidth=0,fill=u.colors[1])+
