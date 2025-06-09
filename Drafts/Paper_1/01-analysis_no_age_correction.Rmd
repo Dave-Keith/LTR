@@ -1267,7 +1267,9 @@ lambda.by.stock <- res.lambda.fin |> collapse::fgroup_by(Stock.short) |> collaps
 prop.lam.lt.1.nf <-   round(100*median(lambda.by.stock$years.lt.1.nf/lambda.by.stock$n.years),digits = 1)    
 prop.lam.lt.1.fish <-   round(100*median(lambda.by.stock$years.lt.1.fish/lambda.by.stock$n.years),digits = 1)
 prop.usually.lt.1.nf <- round(100*length(which(lambda.by.stock$years.lt.1.nf/lambda.by.stock$n.years >= 0.5)) /n.stocks,digits=1)                        
-prop.usually.lt.1.fish <- round(100*length(which(lambda.by.stock$years.lt.1.fish/lambda.by.stock$n.years >= 0.5)) /n.stocks,digits=1)                        
+prop.usually.lt.1.fish <- round(100*length(which(lambda.by.stock$years.lt.1.fish/lambda.by.stock$n.years >= 0.5)) /n.stocks,digits=1)     
+# What about using the mean...
+prop.lam.mean.lt.1.fish <-   round(100*length(lambda.by.stock$mn.lam.fish[which(lambda.by.stock$mn.lam.fish>1)])/n.stocks,digits = 0)
 
 max.median.stock <- lambda.by.stock[lambda.by.stock$med.lam.nf == max(lambda.by.stock$med.lam.nf,na.rm=T),]
 max.median.lam.nf <- round(max.median.stock$med.lam.nf,digits=2)
@@ -1285,12 +1287,17 @@ n.mn.higher.med.no.fish <- length(unique(res.lambda.fin$Stock.short[res.lambda.f
 n.mn.higher.med.fish <- length(unique(res.lambda.fin$Stock.short[res.lambda.fin$med.mn.diff.fish < 0]))
 low.mn.lambda.stocks <- unique(res.lambda.fin$Stock.short[res.lambda.fin$med.mn.diff.fish > 0])
 n.nw.ice <- length(c(grep("NAFO",low.mn.lambda.stocks),grep("Faroe",low.mn.lambda.stocks)))
-n.cod.low.mn <- length(grep("morhua",low.mn.lambda.stocks))
+
+# Now picking on stocks with a mean < 1 in the fishing scenario, only 15 of these...
+stocks.mn.lambda.fish.lt.1 <- lambda.by.stock[which(lambda.by.stock$mn.lam.fish < 1),]
+n.mn.lt.1.nw.ice <- length(c(grep("NAFO",stocks.mn.lambda.fish.lt.1$Stock.short),grep("Faroe",stocks.mn.lambda.fish.lt.1$Stock.short)))
+n.cod.low.mn <- length(grep("morhua",stocks.mn.lambda.fish.lt.1$Stock.short))
 n.cod <- length(grep("morhua",Stocks))
 
 # Density dependence related numbers
 n.bl.40 <- length(which(!is.na(comp.lam.res$lam.fish.40)))
 n.low.40.nf <- length(which(comp.lam.res$lam.nf.40 < 1))
+low.lam.40.stocks.nf <- comp.lam.res[which(comp.lam.res$lam.nf.40 < 1),]
 n.low.40.fish <-length(which(comp.lam.res$lam.fish.40 < 1))
 low.lam.40.nf <- -round(min(comp.lam.diff.res$lam.nf.40,na.rm=T),digits=3)
 low.4.lam.40.nf <- -round(sort(comp.lam.diff.res$lam.nf.40)[4],digits=3)

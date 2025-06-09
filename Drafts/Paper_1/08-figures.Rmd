@@ -69,7 +69,7 @@ knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Doubling_ti
 
 
 \newpage
-```{r dub-vs-sd, echo=F, fig.cap="The recovery potential (low, moderate, or high) of each stock after 20 years compared to the median $\\lambda_{F=0}$ and the standard deviation of $\\lambda_{F=0}$."}
+```{r dub-vs-sd, echo=F, fig.cap="The recovery potential classification (low, moderate, or high)  from the doubling time analysis  for each stock after 20 years compared to the median $\\lambda_{F=0}$ and the standard deviation of $\\lambda_{F=0}$."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Doubling_time_sd_effects_",what.2.tune,".png"))
 ```
 
