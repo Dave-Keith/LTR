@@ -9,9 +9,9 @@ print(x, target = "_book/resdoc-english.docx")
 
 # Add appendix with diff numbering
 rmarkdown::render("appendix.Rmd")
-appendix <- "appendix.docx"
+supplement <- "appendix.docx"
 resdoc <- officer::read_docx(path = "_book/paper_1.docx")
-x <- officer::body_add_docx(resdoc, appendix)
+x <- officer::body_add_docx(resdoc, supplement)
 # Step 4: Save
 # If error message, look for temp file in RStudio Files panel. Select box, and delete in Rstudio. Temp file may not be visible in File explorer.
 print(x, target = "_book/final_draft.docx")

@@ -1,57 +1,136 @@
+---
+output:
+  officedown::rdocx_document:
+    #reference_docx: templates/RES2021-eng-frontmatter.docx
+    tables:
+      style: Table
+      layout: autofit
+      width: 1.0
+      topcaption: true
+      tab.lp: 'tab:'
+      caption:
+        style: Table Caption
+        pre: 'Table '
+        sep: '. '
+        tnd: 0
+        tns: '-'
+        fp_text: !expr officer::fp_text_lite(bold = FALSE)
+      conditional:
+        first_row: true
+        first_column: false
+        last_row: false
+        last_column: false
+        no_hband: false
+        no_vband: true
+    plots:
+      style: Normal
+      align: center
+      fig.lp: 'fig:'
+      topcaption: false
+      caption:
+        style: Image Caption
+        pre: 'Figure A'
+        sep: '. '
+        tnd: 0
+        tns: '-'
+        fp_text: !expr officer::fp_text_lite(bold = FALSE)
+    reference_num: true
+---
+# Supplement A {#app:S}
 
-# APPENDIX A {#app:A}
 
-<!-- f -->
+
+```{r process,echo=F,include=F}
+# This will be the meta data really...
+# remove columns we don't need.
+loc <- "D:/GitHub/ICM/"
+what.2.tune <- 'fec_nm'
+library(csasdown)
+
+meta.sub <- read.csv(paste0(loc,"/Data/metadata_no_age_corection.csv")) # If I re-run everything I won't need this, but for the moment I will.
+rm.meta <- which(names(meta.sub) %in% c("Meeting_or_reference","G.short","G.Species","Manage.short","Area.broad","Area.long","Area.narrow","Stock.short","Stock","Model","Case","Notes","Area"))
+meta.4.tab <- meta.sub[,-rm.meta]
+re.ord <- c(10,3:8,11:12,9,2)
+meta.4.tab <- meta.4.tab[,re.ord]
+# Simplify the management orgs.
+meta.4.tab$Management[grep("ICES",meta.4.tab$Management)] <- "ICES"
+meta.4.tab$Management[grep("TRAC",meta.4.tab$Management)] <- "TRAC"
+meta.4.tab$Management[grep("NEFSC",meta.4.tab$Management)] <- "NEFSC"
+
+names(meta.4.tab) <- c("Stock", "Order", "Family", "Genus", "Species", "Minimum Age", "Maximum Age", "First Year", "Final Year","Location"," Management Body")
+
+```
+
+
 \newpage
-```{r dd-nf-stock-plt, echo=F, fig.cap="Density dependence of $\\lambda_{F=0}$ for each stock in the analysis plotted regionally."}
+
+```{r tab-meta,echo=F}
+# Now make the table for the differences
+csas_table(meta.4.tab,caption ="Summary of the stocks included in this analysis.  The minimum and maximum ages were obtained from original stock assessment output. AFSC is the Alaska Fisheries Science Center, TRAC is the Transboundary Resources Assessment Committee, DFO is Fisheries and Oceans Canada, NEFSC is the Northeast Fisheries Science Center, and ICES is the International Council for the Exploration of the Sea")
+```
+
+
+
+\newpage
+```{r dd-nf-stock-plt, echo=F, fig.cap="Density dependence of $\\lambda_{dem}$ for each stock in the analysis plotted regionally.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/density_dependence_nf_stocks_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r dd-fish-stock-plt, echo=F, fig.cap="Density dependence of $\\lambda_{F>0}$ for each stock in the analysis plotted regionally."}
+```{r dd-fish-stock-plt, echo=F, fig.cap="Density dependence of $\\lambda_{real}$ for each stock in the analysis plotted regionally.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/density_dependence_fish_stocks_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r r0-other-plt, echo=F, fig.cap="$R_0$ estimates for the remainder of the stocks in this analysis, plotted by the location of the stock. The abbreviated species name is provided on the x axis."}
+```{r r0-other-plt, echo=F, fig.cap="$R_0$ estimates for the remainder of the stocks in this analysis (x-axis), plotted by the location of the stock(panels). The abbreviated species name is provided on the y-axis.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/R0_boxplot_other_species_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r r0-nf-ts-plt, echo=F, fig.cap="$R_0$ estimates for every cohort for each species excluding the effects of fishing."}
+```{r r0-nf-ts-plt, echo=F, fig.cap="$R_0$ estimates for every cohort for each species excluding the effects of fishing.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/r0_heatmap_nf_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r r0-fish-ts-plt, echo=F, fig.cap="$R_0$ estimates for every cohort for each species including the effects of fishing."}
+```{r r0-fish-ts-plt, echo=F, fig.cap="$R_0$ estimates for every cohort for each species including the effects of fishing.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/r0_heatmap_fish_",what.2.tune,".png"))
 ```
 
 
 
 \newpage
-```{r gl-other-plt, echo=F, fig.cap="Generation length estimates for the remainder of the stocks in this analysis, plotted by the location of the stock. The abbreviated species name is provided on the x axis."}
+```{r gl-other-plt, echo=F, fig.cap="Generation length estimates for the remainder of the stocks in this analysis (x-axis), plotted by the location of the stock (panels). The abbreviated species name is provided on the y-axis.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/GL_boxplot_other_species_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r gl-nf-ts-plt, echo=F, fig.cap="Generation length estimates for every cohort for each species excluding the effects of fishing."}
+```{r gl-nf-ts-plt, echo=F, fig.cap="Generation length estimates for every cohort for each species excluding the effects of fishing.",fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/GL_heatmap_nf_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r gl-fish-ts-plt, echo=F, fig.cap="Generation length estimates for every cohort for each species including the effects of fishing."}
+```{r gl-fish-ts-plt, echo=F, fig.cap="Generation length estimates for every cohort for each species including the effects of fishing.", fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/GL_heatmap_fish_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r dub-ts, echo=F, fig.cap="The number of stocks which doubled in size by a given year with no fishing mortality  The dashed line represents the 77 stocks in the analysis."}
+```{r dub-ts, echo=F, fig.cap="The number of stocks (-axis) which doubled in size after a given number of simulated years (x-axis) with no fishing mortality  The dashed line represents the 77 stocks in the analysis.", fig.out.width = "100%"}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Doubling_time_time_series_",what.2.tune,".png"))
+```
+
+\newpage
+```{r lambda-age-6s-nf, echo=F, fig.cap="Boxplots of $\\lambda_{dem}$ estimates from the analysis in which the abundances were back-calculated for stocks in which the youngest age-class data available were greater than 1. A subest of the results are shown here, with results for each stock of *G. morhua*, *M. aeglefinus*, *P. virens*, *C. harengus*, *P. platessa*, and *S. solea*. The blue stars indicate the mean and the dashed horizontal line represents a $\\lambda$ of one. The y axis is on the log scale.",fig.out.width = "100%"}
+knitr::include_graphics(paste0(loc,"/Figures/tuned/lambda_no_fishing_6_fec_nm.png"))
+```
+
+\newpage
+```{r lambda-age-6s-fish, echo=F, fig.cap="Boxplots of $\\lambda_{real}$ estimates from the analysis in which the abundances were back-calculated for stocks in which the youngest age-class data available were greater than 1. A subest of the results are shown here, with results for each stock of *G. morhua*, *M. aeglefinus*, *P. virens*, *C. harengus*, *P. platessa*, and *S. solea*. The blue stars indicate the mean and the dashed horizontal line represents a $\\lambda$ of one. The y axis is on the log scale.", fig.out.width = "100%"}
+knitr::include_graphics(paste0(loc,"/Figures/tuned/lambda_with_fishing_6_fec_nm.png"))
 ```

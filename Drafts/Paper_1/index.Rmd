@@ -1,6 +1,6 @@
 ---
 title: |
-   "Variability in the recovery potential of globally exploited marine teleosts "
+   "Demographics and recovery potential of exploited marine teleosts "
 french_title: "Titre ici (*Nom latin de l'espèce*)"
 author: |
   David. M. Keith^1^ 
@@ -28,11 +28,10 @@ cat_no: ""
 citation_other_language: ""
 
 abstract: |
-   Marine fishes were once believed to be extremely resilient to the effects of fishing, however this view changed with the collapse of several historically important stocks across the globe.  While equilibrium concepts and compensatory density dependence remain fundamental to fisheries science, these stock collapses and an increasing appreciation of environmental factors raise questions about their real-world applicability. Here, we calculated metrics commonly used in conservation biology to describe annual demographic variability in assessed stocks in the north Atlantic and the northeast Pacific Oceans using life-tables. We found that median annual population growth rates ($\lambda$) centered around 1, and surprisingly, were only slightly higher when the effect of fishing was excluded. For stocks that had not experienced appreciable decline, population growth was maintained by a limited number of years with exceptionally high population growth rates. For most stocks, as abundance declined, $\lambda$ tended to increase and become more variable as would be expected from compensatory dynamics. However, the ability of a stock to increase from low abundance appeared largely independent of life history characteristics and exhibited stronger geographical patterns among stocks of the same species (notably Atlantic cod). Life history characteristics alone were a poor predictor of annual population growth or future recovery potential, with greater variability observed among stocks rather than among species with distinct regions associated with generally higher or generally lower vital rates. However, recovery potential was remained relatively high, with simulations indicating that 68 of the 77 stocks were likely to double in size within 20 years in the absence of fishing. Stocks with a low recovery potential were constrained to stocks with both a low median $\lambda$ and low variability in $\lambda$. These results indicate that life history characteristics alone are unable to capture the observed variability in demographic rates for harvested fishes, understanding stock-specific demographic parameters (rather than species-specific life-history parameters) are necessary for promoting sustainable management strategies and developing rebuilding plans for stocks that have collapsed.
-  
- <!-- Marine fishes were once believed to be extremely resilient to the effects of fishing, however this view changed with the collapse of several historically important stocks across the globe. Despite extensive research exploring the dynamics of harvested marine fishes, few studies have explored the underlying demographic variability of harvested marine fishes using conservation biology and population ecology perspectives. Here we reconstructed the demographics of 77 fish stocks that are assessed in the north Atlantic and the northeast Pacific Oceans using life-tables. The demographic variability of these stocks was quantified using metrics commonly used in conservation biology (i.e., population growth rates, recovery potential, lifetime reproductive success, and generation time). The annual discrete population growth rate ($\lambda$) indicated that the stocks had an innate capacity for population growth with the median $\lambda$ of 1.09 (an increase of approximately 9% annually) across all stocks and years when excluding the contribtuion of fishing mortality. When fishing mortality was included the stock mean $\lambda$ declined to 1.05 overall. However, indvidual $\lambda$ values when accounting for fishing mortality were below one in 57% of the years (median $\lambda$ was 0.97 when accounting for fishing mortality). As a result, for many of the stocks in this analysis, population growth is driven by years with exceptionally high population growth rates. For most stocks, as abundance declined, $\lambda$ tended to increase and become more variable, however these general patterns are highly variable among stocks and regionally. For example, Atlantic cod stocks in the northwest (NW) Atlantic had few large recruitment events and evidence of positive density dependence (i.e., Allee effects or depensation) was relatively strong. Overall, the recovery potential was relatively high, with simulations indicating that 62 of the 77 stocks in this analysis would be highly likely to double in size within 20 years in the absence of fishing. Stocks with a low recovery potential were constrained to stocks with both a low median $\lambda$ and low variability in the $\lambda$. Finally, we note that life history characteristics alone were a poor predictor of annual population growth or future recovery potential, with greater variability observed among stocks rather than among species with distinct regions associated with generally higher or generally lower vital rates.  -->
-
-french_abstract: |
+   Equilibrium concepts and the expectation of compensatory density dependence remain fundamental to fisheries science, but stock collapses and an increasing appreciation of environmental factors have raised questions about their real-world applicability. To explore the demographic variability of harvested marine fishes, we have calculated metrics commonly used in conservation biology to describe the demographics for 77 assessed stocks from the north Atlantic and northeast Pacific Oceans using life-tables. We found that median annual population growth rates ($\lambda$) were centered around 1, and surprisingly, they were only slightly higher when the effect of fishing was excluded. For most stocks, as abundance declined, $\lambda$ tended to increase and become more variable as would be expected from compensatory dynamics. The population growth of several stocks was maintained by a limited number of years with exceptionally high population growth rates. However, the ability of a stock to increase from low abundance appeared largely independent of life history characteristics and exhibited stronger geographical differences among stocks of the same species (notably Atlantic cod). Life history characteristics alone were poor predictors of annual population growth or future recovery potential and regional factors appeared to be more influential than life-history characteristics. Overall, recovery potential remained relatively high, with simulations indicating that 62 of the stocks would be highly likely to double in size within 20 years in the absence of fishing. Low recovery potential was exclusively observed in stocks with a low median $\lambda$ and low variability in $\lambda$. These results suggest that understanding stock-specific (rather than species-specific) demographic parameters is necessary to promote sustainable management or developing rebuilding plans for collapsed stocks.
+   
+french_abstract: | 
+  NIL
 
 header: "Draft working paper --- Do not cite or circulate" # or "" to omit
 output:
@@ -53,9 +52,8 @@ knit: (function(input, ...) {
       })
 link-citations: true
 bibliography: Y:/Zotero/MAR_SABHU.bib
-# Any extra LaTeX code for the header:
-# header-includes:
-# - \usepackage{tikz}
+csl: Y:/Zotero/styles/plos-one.csl
+
 ---
 
 ```{r setup, echo=FALSE, cache=FALSE, message=FALSE, results='hide', warning=FALSE}
@@ -116,6 +114,7 @@ library(lme4)
 library(scales)
 library(ggh4x)
 library(gratia)
+#library(legendary)
 theme_set(theme_few(base_size = 14))
 
 
@@ -148,7 +147,7 @@ for(fun in funs)
 
 if(load.results==F)
 {
-  # Choose 5 ICES stocks that we have the necessary data for
+  # Choose ICES stocks that we have the necessary data for
   #ASR <- read_xlsx("../Data/ASR_2018.xlsx" sheet = "ICES")
   ASR1 <- read.csv(paste0(loc,"/Data/ICM_data_NE_atlantic_stocks.csv"))
   ASR <- read.csv(paste0(loc,"/Data/ICM_data_NW_atlantic_stocks.csv"))

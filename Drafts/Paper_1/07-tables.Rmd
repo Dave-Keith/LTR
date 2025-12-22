@@ -7,38 +7,29 @@ editor_options:
 ---
 \clearpage
 \newpage
+\landscape
 
 # Tables {-}
 
-```{r, process}
-# This will be the meta data really...
-# remove columns we don't need.
 
-rm.meta <- which(names(meta.sub) %in% c("Meeting_or_reference","G.short","G.Species","Manage.short","LME","Area.broad","Area.long","Area.narrow","Stock.short","Stock","Model","Case","Notes","Area"))
-meta.4.tab <- meta.sub[,-rm.meta]
-re.ord <- c(8,2:7,1)
-meta.4.tab <- meta.4.tab[,re.ord]
-names(meta.4.tab) <- c("Stock", "Order", "Family", "Genus", "Species", "Minimum Age", "Maximum Age", "Management Body")
-
+```{r,tab-lamda-temp}
+# Now make the table for the differences
+csas_table(lambda.by.decade,caption ="A comparison of the median, mean, and standard deviation of $\\lambda_{dem}$ and $\\lambda_{real}$ by decade for all the stocks in this analysis.  The table includes the number of stocks included in each decade (N) and the median proporiton of the maximum observed abundance (Prop of max)")
 ```
+
+\newpage
+
 
 ```{r,tab-lambdas}
 # The table with the lambda values
-csas_table(comp.lam.res.tab,caption ="A comparison of the $\\lambda_{F=0}$ and $\\lambda_{F>0}$ estimates for stock at the minimum and maximum abundance, along with the estimate at 40\\% of the maximum abundance. values greater than 1 indicate that the population would be expected to increase in size, while values less than 1 indicate the population is likely to decline in size")
+csas_table(comp.lam.res.tab,caption ="A comparison of the $\\lambda_{dem}$ and $\\lambda_{real}$ estimates for stock at the minimum and maximum abundance, along with the estimate at 40\\% of the maximum abundance. Values greater than 1 indicate that the population would tend to increase in size, while values less than 1 indicate the population would tend to decline in size.")
 ```
 
 \newpage
 
 ```{r,tab-lamda-diffs}
 # Now make the table for the differences
-csas_table(comp.lam.diff.res.tab,caption ="A comparison of the difference in $\\lambda_{F=0}$ and $\\lambda_{F>0}$ for each stock at the minimum and maximum abundance, along with the change at 40\\% of the maximum abundance. Positive values indicate that the $\\lambda$ estimae has increased as abundance declines (consistent with negative density dependence), while negative values indicate the $\\lambda$ estimate has declined (considtent with positive density dependence)")
-```
-
-
-
-```{r,tab-meta}
-# Now make the table for the differences
-csas_table(meta.4.tab,caption ="Summary of the stocks included in this analysis.  The minimun and maximum ages are what was used in the stock assessment.")
+csas_table(comp.lam.diff.res.tab,caption ="A comparison of the difference in $\\lambda_{dem}$ and $\\lambda_{real}$ for each stock at the minimum and maximum abundance, along with the change at 40\\% of the maximum abundance. Positive values indicate that the $\\lambda$ estimate has increased as abundance declines (consistent with negative density dependence), while negative values indicate the $\\lambda$ estimate has declined (consistent with positive density dependence)")
 ```
 
 

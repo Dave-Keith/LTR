@@ -22,54 +22,61 @@ options(tinytex.verbose = TRUE)
 # Figures {-}
 
 
-```{r lambda-bx-6-fig, echo=F, fig.cap="$\\lambda$ estimates for each stock of G. morhua, M. aeglefinus, P. virens, C. harengus, P. platessa, and S. solea."}
+
+```{r locations, echo=F, fig.cap="Locations of the stocks used in this analysis. Colors indicate the number of stocks within each subarea. In the Atlantic the subareas were divided using the ICES and NAFO subareas. The ICES region was grouped into seven subareas which broadly aligned with the ecoregions definitions developed by ICES. The NAFO subareas were divided into two regions, the first combining NAFO Regions 2J, 3, and 4 with the second combining NAFO regions 5 and 6(A-C). In the Pacific, the subareas were divided into a Gulf of Alaska subarea and a subarea covering the Bering Sea and Aleutian Islands. The divisions were made using the Alaska Department of Fish and Game Commercial Fisheries Groundfish Registration Areas."}
+knitr::include_graphics(paste0(loc,"/Figures/Map_of_stocks_by_region.png"))
+
+```
+
+
+```{r lambda-bx-6-fig, echo=F, fig.cap="Boxplot of the $\\lambda$ estimates for each stock of *G. morhua*, *M. aeglefinus*, *P. virens*, *C. harengus*, *P. platessa*, and *S. solea*. Blue are the $\\lambda_{dem}$ estimates and grey are the $\\lambda_{real}$ estimates.  The red stars indicate the median and the dashed vertical line represents a $\\lambda$ of one. The x axis is on the log scale."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Lambda_boxplot_6_species_",what.2.tune,".png"))
 
 ```
 
 
 \newpage
-```{r lambda-bx-other-fig, echo=F, fig.cap="$\\lambda$ estimates for the remainder of the stocks in this analysis, plotted by the location of the stock. The abbreviated species name is provided on the x axis."}
+```{r lambda-bx-other-fig, echo=F, fig.cap="Boxplot of the $\\lambda$ estimates for the remainder of the stocks in this analysis, plotted by the location of the stock. The abbreviated species name is provided on the y axis. Blue are the $\\lambda_{dem}$ estimates and grey are the $\\lambda_{real}$ estimates. The red stars indicate the median and the dashed vertical line represents a $\\lambda$ of one. The x axis is on the log scale."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Lambda_boxplot_other_species_",what.2.tune,".png"))
 
 ```
 
 
 \newpage
-```{r lambda-sd-fig, echo=F, fig.cap="The average standard deviation of $\\lambda_{F = 0}$  for Atlantic herring (*C. harenugs*), Atlantic cod (*G. morhua*), haddock (*M. aeglefinus*), and pollock (*P. virens) stocks in the western Atlantic (NAFO regions 2-5), Northern Altantic (Iceland, Faroe's, and the northeast Arctic), and Eastern Atlantic (Irish, Celtic, North, and Baltic Seas). The errorbars represent one standard deviation. "}
+```{r lambda-sd-fig, echo=F, fig.cap="The average standard deviation of $\\lambda_{dem}$  for Atlantic herring (*C. harengus*), Atlantic cod (*G. morhua*), haddock (*M. aeglefinus*), and pollock (*P. virens) stocks in the western Atlantic (NAFO regions 2-5), Northern Atlantic (Iceland, Faroe's, and the northeast Arctic), and Eastern Atlantic (Irish, Celtic, North, and Baltic Seas). The error bars represent one standard deviation. "}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Lambda_sd_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r dd-overall-plt, echo=F, fig.cap="Density dependence of $\\lambda$ The top panel shows $\\lambda_{F=0}$ against the proportion of maximum abundance, with a GAM smooth and the GAM estimated 95\\% confidence interval. The middle panel shows $\\lambda_{F>0}$ against the proportion of maximum abundance, with a GAM smooth and the GAM estimated 95% confidence interval. The bottom panel compares the GAM smooths for $\\lambda_{F=0}$ and $\\lambda_{F>0}$."}
-knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/density_dependence_overall_",what.2.tune,".png"))
+```{r dd-overall-plt, echo=F, fig.cap="Density dependence of $\\lambda$. Panel (a) compares the GAM smooths for $\\lambda_{dem}$ and $\\lambda_{real}$ and the GAM smooth and the GAM estimated 95\\% confidence interval. Panel (b) shows $\\lambda_{dem}$ against the proportion of maximum abundance. The points represent the estimate for each year and stock along with the GAM smooth and the GAM estimated 95\\% confidence interval. Panel (c) shows $\\lambda_{real}$ against the proportion of maximum abundance. Panel (d) shows the data and GAM smooths for two Atlantic cod (*G. morhua*) stocks in the Northeast Atlantic and two stocks in the Northwest Atlantic."}
+knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/density_dependence_overall_with_4_cod_",what.2.tune,".png"))
 ```
 
 
 
 \newpage
-```{r r0-6-plt, echo=F, fig.cap="$R_0$ estimates for each stock of G. morhua, M. aeglefinus, P. virens, C. harengus, P. platessa, and S. solea."}
+```{r r0-6-plt, echo=F, fig.cap="$R_0$ estimates for each stock of *G. morhua, M. aeglefinus, P. virens, C. harengus, P. platessa, and S. solea*. The blue values are calculated using natural mortality and grey includes both natural mortality and fishing mortality.  The red stars indicate the median and the dashed vertical line represents a lifetime reproductive output of one. The x axis is on the log scale."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/R0_boxplot_6_species_",what.2.tune,".png"))
 ```
 
 
 \newpage
-```{r gl-6-plt, echo=F, fig.cap="Generation length estimates for each stock of G. morhua, M. aeglefinus, P. virens, C. harengus, P. platessa, and S. solea."}
+```{r gl-6-plt, echo=F, fig.cap="Generation time estimates for each stock of *G. morhua, M. aeglefinus, P. virens, C. harengus, P. platessa, and S. solea*. The blue values are calculated using natural mortality and grey includes both natural mortality and fishing mortality. The red stars indicate the median."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/GL_boxplot_6_species_",what.2.tune,".png"))
 ```
 
 <!-- Now for the Doubling time -->
 
 \newpage
-```{r dub-time-map, echo=F, fig.cap="Doubling time estimate for each stock with no fishing mortality."}
+```{r dub-time-map, echo=F, fig.cap="Proportion of the simulations in which a given stock has doubled in size when there is no fishing mortality. Stocks are grouped by taxonomic order, with 39 Gadiform stocks, 2 Scombriform stocks, 1 Scorpaeniform stock, 20 Pleuronectiform stocks, 11 Clupeiform stocks, and 4 Perciform stocks. The x-axis represents the year of the simulation, with the first 20 years shown."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Doubling_time_heatmap_by_order_",what.2.tune,".png"))
 ```
 
 
 
 \newpage
-```{r dub-vs-sd, echo=F, fig.cap="The recovery potential classification (low, moderate, or high)  from the doubling time analysis  for each stock after 20 years compared to the median $\\lambda_{F=0}$ and the standard deviation of $\\lambda_{F=0}$."}
+```{r dub-vs-sd, echo=F, fig.cap="The doubling time recovery potential, the colors represent low (grey), moderate (white), or high(blue) for each stock after 20 years compared to the median $\\lambda_{dem}$ and the standard deviation of $\\lambda_{dem}$. The red dashed line on the left panel is a $\\lambda_{dem}$ value of one."}
 knitr::include_graphics(paste0(loc,"/Figures/tuned/No_age_correction/Doubling_time_sd_effects_",what.2.tune,".png"))
 ```
 

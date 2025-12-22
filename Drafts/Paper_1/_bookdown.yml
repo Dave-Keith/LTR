@@ -7,8 +7,8 @@ rmd_files: ["index.Rmd",
             "05-discussion.Rmd",
             "06-references.Rmd",
             "07-tables.Rmd",
-            "08-figures.Rmd",
-            "appendix.Rmd"]
+            "08-figures.Rmd"
+            ]
             
 delete_merged_file: true
 
